@@ -1,6 +1,7 @@
+use rand::{thread_rng, Rng};
 use std::fmt::{self, Display};
 use std::ops::{
-    Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
+    Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Range, Sub, SubAssign,
 };
 
 #[derive(Clone, Copy)]
@@ -51,10 +52,31 @@ impl Vec3 {
     }
 
     pub fn format_color(self, samples_per_pixel: u64) -> String {
-        let ir = (256.0 * (self[0] / (samples_per_pixel as f64)).clamp(0.0, 0.999)) as u64;
-        let ig = (256.0 * (self[1] / (samples_per_pixel as f64)).clamp(0.0, 0.999)) as u64;
-        let ib = (256.0 * (self[2] / (samples_per_pixel as f64)).clamp(0.0, 0.999)) as u64;
+        let scale = 1.0 / samples_per_pixel as f64;
+        let ir = (256.0 * (self[0] * scale).sqrt().clamp(0.0, 0.999)) as u64;
+        let ig = (256.0 * (self[1] * scale).sqrt().clamp(0.0, 0.999)) as u64;
+        let ib = (256.0 * (self[2] * scale).sqrt().clamp(0.0, 0.999)) as u64;
         format!("{} {} {}", ir, ig, ib)
+    }
+
+    pub fn random(r: Range<f64>) -> Vec3 {
+        let mut rng = thread_rng();
+        Vec3 {
+            e: [
+                rng.gen_range(r.clone()),
+                rng.gen_range(r.clone()),
+                rng.gen_range(r.clone()),
+            ],
+        }
+    }
+
+    pub fn random_in_unit_sphere() -> Vec3 {
+        loop {
+            let v = Vec3::random(-1.0..1.0);
+            if v.length() < 1.0 {
+                return v;
+            }
+        }
     }
 }
 
