@@ -51,6 +51,15 @@ impl Vec3 {
         self / self.length()
     }
 
+    pub fn near_zero(self) -> bool {
+        const EPS: f64 = 1.0e-8;
+        self[0].abs() < EPS && self[1].abs() < EPS && self[2].abs() < EPS
+    }
+
+    pub fn reflect(self, n: Vec3) -> Vec3 {
+        self - 2.0 * self.dot(n) * n
+    }
+
     pub fn format_color(self, samples_per_pixel: u64) -> String {
         let scale = 1.0 / samples_per_pixel as f64;
         let ir = (256.0 * (self[0] * scale).sqrt().clamp(0.0, 0.999)) as u64;
@@ -145,6 +154,16 @@ impl Mul<f64> for Vec3 {
     fn mul(self, other: f64) -> Vec3 {
         Vec3 {
             e: [self[0] * other, self[1] * other, self[2] * other],
+        }
+    }
+}
+
+impl Mul for Vec3 {
+    type Output = Vec3;
+
+    fn mul(self, other: Vec3) -> Vec3 {
+        Vec3 {
+            e: [self[0] * other[0], self[1] * other[0], self[2] * other[0]],
         }
     }
 }
