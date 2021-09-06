@@ -90,6 +90,10 @@ impl Vec3 {
         }
     }
 
+    pub fn random_unit_vector() -> Vec3 {
+        Self::random_in_unit_sphere().normalized()
+    }
+
     pub fn random_in_unit_sphere() -> Vec3 {
         loop {
             let v = Vec3::random(-1.0..1.0);

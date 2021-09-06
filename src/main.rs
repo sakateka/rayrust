@@ -40,10 +40,10 @@ fn ray_color(r: &Ray, world: &World, depth: u64) -> Color {
 fn main() {
     // Image
     const ASPECT_RATIO: f64 = 16.0 / 9.0;
-    const IMAGE_WIGHT: u64 = 1080;
+    const IMAGE_WIGHT: u64 = 1200;
     const IMAGE_HEIGHT: u64 = (IMAGE_WIGHT as f64 / ASPECT_RATIO) as u64;
     const SAMPLES_PER_PIXEL: u64 = 100;
-    const MAX_DEPTH: u64 = 5;
+    const MAX_DEPTH: u64 = 50;
 
     // World
     let mut world = World::new();
@@ -71,7 +71,7 @@ fn main() {
         Point3::new(-2.0, 2.0, 1.0),
         Point3::new(0.0, 0.0, -1.0),
         Vec3::new(0.0, 1.0, 0.0),
-        20.0,
+        50.0,
         ASPECT_RATIO,
     );
 
