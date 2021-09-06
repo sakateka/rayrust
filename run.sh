@@ -1,1 +1,1 @@
-cargo run --release > image.ppm && convert image.ppm image.png && xdg-open image.png
+cargo run --release | convert - image.png && xdg-open image.png
