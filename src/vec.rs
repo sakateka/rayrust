@@ -111,6 +111,16 @@ impl Vec3 {
             -in_unit_sphere
         }
     }
+
+    pub fn random_in_unit_disk() -> Vec3 {
+        let mut rng = thread_rng();
+        loop {
+            let v = Vec3::new(rng.gen_range(-1.0..1.0), rng.gen_range(-1.0..1.0), 0.0);
+            if v.length() < 1.0 {
+                return v;
+            }
+        }
+    }
 }
 
 impl Index<usize> for Vec3 {
