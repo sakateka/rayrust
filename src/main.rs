@@ -85,9 +85,9 @@ fn random_scene() -> World {
     let mat2 = Arc::new(Lambertian::new(Color::new(0.4, 0.2, 0.1)));
     let mat3 = Arc::new(Metal::new(Color::new(0.7, 0.6, 0.5), 0.0));
 
-    let sphere1 = Sphere::new(Point3::new(0.0, 1.0, 0.0), 1.0, mat1);
+    let sphere1 = Sphere::new(Point3::new(0.0, 1.0, 0.0), 1.0, mat3);
     let sphere2 = Sphere::new(Point3::new(-4.0, 1.0, 0.0), 1.0, mat2);
-    let sphere3 = Sphere::new(Point3::new(4.0, 1.0, 0.0), 1.0, mat3);
+    let sphere3 = Sphere::new(Point3::new(4.0, 1.0, 0.0), 1.0, mat1);
 
     world.push(Box::new(sphere1));
     world.push(Box::new(sphere2));
