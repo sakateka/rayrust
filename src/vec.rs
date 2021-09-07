@@ -121,6 +121,10 @@ impl Vec3 {
             }
         }
     }
+
+    pub fn into_color(self) -> Color {
+        self
+    }
 }
 
 impl Index<usize> for Vec3 {
