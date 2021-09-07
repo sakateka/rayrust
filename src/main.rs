@@ -97,6 +97,7 @@ fn main() {
             }
             println!("{}", pixel_color.format_color(SAMPLES_PER_PIXEL));
         }
+        eprint!("\x1b[1A\x1b[2K\r") // cursor up and clear line
     }
     eprintln!("Done.")
 }
